@@ -13,5 +13,6 @@ CRUD app to manage some product list.
 
 ## To install
 * `composer update`
+* `bower install`
 * `php app/console assetic:dump`
 * `php app/console cache:clear`
