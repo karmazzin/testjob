@@ -10,3 +10,8 @@ CRUD app to manage some product list.
 [Twitter Bootstrap]:http://twitter.github.com/bootstrap/
 [AngularJS]:http://angularjs.org
 [Bower]:http://bower.io/
+
+## To install
+* `composer update`
+* `php app/console assetic:dump`
+* `php app/console cache:clear`

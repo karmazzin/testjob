@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts%}
+    {% javascripts
+    '@AppBundle/Resources/public/vendor/angular/angular.js'
+    '@AppBundle/Resources/public/vendor/jquery/dist/jquery.js'
+    '@AppBundle/Resources/public/vendor/bootstrap/dist/js/bootstrap.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
 {% block body %}
     Homepage.
 {% endblock %}
