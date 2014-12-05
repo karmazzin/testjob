@@ -1,0 +1,22 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block javascripts%}
+    {% javascripts
+    '@AppBundle/Resources/public/vendor/angular/angular.js'
+    '@AppBundle/Resources/public/vendor/angular-resource/angular-resource.js'
+    '@AppBundle/Resources/public/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
+
+    '@AppBundle/Resources/public/js/app.js'
+    '@AppBundle/Resources/public/js/controllers.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block stylesheets%}
+    {% stylesheets
+    '@AppBundle/Resources/public/vendor/bootstrap/dist/css/bootstrap.min.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet">
+    {% endstylesheets %}
+{% endblock %}
