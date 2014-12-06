@@ -92,7 +92,7 @@
             });
 
             modalInstance.result.then(function (result) {
-                $scope.$apply($scope.products.splice($index, 1));
+                $scope.products.splice($index, 1);
             });
         };
 
