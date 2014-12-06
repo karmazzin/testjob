@@ -20,3 +20,10 @@
     <link href="{{ asset_url }}" rel="stylesheet">
     {% endstylesheets %}
 {% endblock %}
+
+{% block body%}
+    <div class="container">
+        {% block container %}{% endblock %}
+    </div>
+{% endblock %}
+

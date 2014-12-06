@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h3 class="modal-title">Form of product</h3>
+</div>
+<style>
+    .form-group.required .control-label:after {
+        color: #d00;
+        content: "*";
+        position: absolute;
+        margin-left: 8px;
+        top:7px;
+    }
+    img.to_remove {
+        -webkit-filter: blur(1px) grayscale(1);
+    }
+
+</style>
+<div class="modal-body">
+    <form id="form" class="form" name="productForm" ng-submit="sendForm()" novalidate>
+        <alert ng-repeat="error in errors" type="danger">[[error.property_path]]: [[error.message]]</alert>
+        <div class="form-group" ng-if="product.id">
+            <div class="thumbnail">
+                <img ng-src="upload/product/[[product.id]]/[[product.photo]]" ng-class="{ to_remove: product.image}" alt="[[product.title]]"/>
+            </div>
+        </div>
+        <div class="form-group required">
+            <label class="col-md-2 control-label">Title</label>
+            <input class="form-control" placeholder="title" type="text" ng-model="product.title" required/>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Description</label>
+            <textarea class="form-control" placeholder="description" cols="30" rows="10" ng-model="product.description"></textarea>
+        </div>
+        <div class="form-group required">
+            <label class="col-md-2 control-label">Photo</label>
+            <input type="file" files-model="product.image" required>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button ng-hide="product.id" class="btn btn-primary btn-lg" form="form" type="submit">Save</button>
+    <button ng-show="product.id" class="btn btn-success btn-lg" form="form" type="submit">Update</button>
+</div>
+
+
