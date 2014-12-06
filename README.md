@@ -12,7 +12,9 @@ CRUD app to manage some product list.
 [Bower]:http://bower.io/
 
 ## To install
-* `composer update`
+* `composer install`
 * `bower install`
-* `php app/console assetic:dump`
-* `php app/console cache:clear`
+* `php app/console doctrine:database:create`
+* `php app/console doctrine:migrations:migrate`
+* `php app/console assetic:dump --no-debug`
+* `php app/console cache:clear --no-debug`
