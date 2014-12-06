@@ -43,9 +43,12 @@ class Product
      * @var string
      *
      * @Assert\NotBlank()
-     * @Assert\Image()
+     * @Assert\Image(
+     *     groups={"upload"}
+     * )
      * @Assert\File(
      *     maxSize = "4096k",
+     *     groups={"upload"}
      * )
      * @ORM\Column(name="photo", type="string", length=255)
      */
@@ -55,7 +58,7 @@ class Product
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +81,7 @@ class Product
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -101,7 +104,7 @@ class Product
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -124,7 +127,7 @@ class Product
     /**
      * Get photo
      *
-     * @return string 
+     * @return string
      */
     public function getPhoto()
     {
@@ -159,7 +162,7 @@ class Product
      */
     public function uploadPhoto() {
         // the file property can be empty if the field is not required
-        if (null === $this->photo) {
+        if (null === $this->photo || is_string($this->photo)) {
             return;
         }
         if(!$this->id){
@@ -190,7 +193,12 @@ class Product
      */
     public function removePhoto()
     {
-        unlink($this->getFullPhotoPath());
-        rmdir($this->getUploadRootDir());
+        if(file_exists($this->getFullPhotoPath())){
+            unlink($this->getFullPhotoPath());
+        }
+
+        if(is_dir($this->getUploadRootDir())){
+            rmdir($this->getUploadRootDir());
+        }
     }
 }
