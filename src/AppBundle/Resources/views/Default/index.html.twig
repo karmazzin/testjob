@@ -16,7 +16,7 @@
             <tr ng-show="products.length" ng-repeat="product in products track by $index">
                 <td class="col-md-2">
                     <div class="thumbnail">
-                        <img ng-src="upload/product/[[product.id]]/[[product.photo]]" alt="[[product.title]]"/>
+                        <img ng-src="/upload/product/[[product.id]]/[[product.photo]]" alt="[[product.title]]"/>
                     </div>
                 </td>
                 <td class="col-md-3">[[product.title]]</td>

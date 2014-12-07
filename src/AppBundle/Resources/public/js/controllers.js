@@ -4,7 +4,7 @@
     var app = angular.module('testjob');
 
     app.factory('Product', function($resource) {
-        return $resource('app_dev.php/api/products/:id', {
+        return $resource('/api/products/:id', {
                 id: '@id'
         });
     });
