@@ -1,10 +1,9 @@
 security:
     providers:
-        in_memory:
-            memory:
-                users:
-                    ryan:  { password: ryanpass, roles: 'ROLE_USER' }
-                    admin: { password: kitten, roles: 'ROLE_USER' }
+        main:
+            entity:
+                class: AppBundle\Entity\Security
+                property: username
 
     firewalls:
         dev:
@@ -22,4 +21,4 @@ security:
         - { path: ^/, roles: ROLE_USER }
 
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\Security: sha512
