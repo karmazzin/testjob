@@ -143,7 +143,7 @@ class DefaultController extends Controller
             $product->setPhoto($request->files->get('image'));
             $validate_group = ['upload'];
         } else {
-            $validate_group = [];
+            $validate_group = false;
         }
 
         $result = $this->validatePersistProduct($product, $validate_group);
@@ -156,8 +156,8 @@ class DefaultController extends Controller
     protected function validatePersistProduct($product, $validate_group) {
 
         $serializer = $this->get('jms_serializer');
-        $validator = $this->get('validator', $validate_group);
-        $errors = $validator->validate($product);
+        $validator = $this->get('validator');
+        $errors = $validator->validate($product, $validate_group);
 
         if (count($errors) > 0) {
             return new Response($serializer->serialize($errors, 'json'), 400);

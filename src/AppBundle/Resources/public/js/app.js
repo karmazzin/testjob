@@ -21,6 +21,9 @@
                             });
                         }
                     } else {
+                        if (value === undefined) {
+                            value = '';
+                        }
                         fd.append(key, value);
                     }
                 });

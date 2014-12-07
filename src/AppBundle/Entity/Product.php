@@ -27,7 +27,7 @@ class Product
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"upload", "Default"})
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -42,12 +42,12 @@ class Product
     /**
      * @var string
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"upload"})
      * @Assert\Image(
      *     groups={"upload"}
      * )
      * @Assert\File(
-     *     maxSize = "4096k",
+     *     maxSize = "1024k",
      *     groups={"upload"}
      * )
      * @ORM\Column(name="photo", type="string", length=255)
