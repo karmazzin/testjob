@@ -18,7 +18,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render(
-          'AppBundle:Default:index.html.twig'
+          'AppBundle:Default:index.html.twig', ['name' => $this->getUser()->getUsername()]
         );
     }
 
