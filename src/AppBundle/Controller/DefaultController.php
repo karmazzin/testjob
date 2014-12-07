@@ -38,7 +38,7 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Product');
-        $product = $repository->find($request->get('id'));
+        $product = $repository->findProductsByUser($this->getUser()->getId(), $request->get('id'));
 
         if (!$product) {
             throw $this->createNotFoundException('The product does not exist');
@@ -67,10 +67,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Product');
 
-        if ($id = $request->get("id")) {
-            $result = $repository->findById($id);
+        if ($product_id = $request->get("id")) {
+            $result = $repository->findProductsByUser($this->getUser()->getId(), $product_id);
         } else {
-            $result = $repository->findAll();
+            $result = $repository->findProductsByUser($this->getUser()->getId());
         }
 
         if (!$result) {
@@ -102,7 +102,8 @@ class DefaultController extends Controller
         $product
           ->setTitle($request->request->get('title'))
           ->setDescription($request->request->get('description', ''))
-          ->setPhoto($request->files->get('image'));
+          ->setPhoto($request->files->get('image'))
+          ->setUser($this->getUser());
 
         $validate_group = ['upload'];
         $result = $this->validatePersistProduct($product, $validate_group);
@@ -136,7 +137,8 @@ class DefaultController extends Controller
 
         $product
           ->setTitle($request->request->get('title'))
-          ->setDescription($request->request->get('description', ''));
+          ->setDescription($request->request->get('description', ''))
+          ->setUser($this->getUser());
 
         if ($photo = $request->files->get('image')) {
             $product->removePhoto();

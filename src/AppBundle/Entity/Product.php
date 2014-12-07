@@ -54,6 +54,11 @@ class Product
      */
     private $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Security", inversedBy="products")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * Get id
@@ -200,5 +205,28 @@ class Product
         if(is_dir($this->getUploadRootDir())){
             rmdir($this->getUploadRootDir());
         }
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\Security $user
+     * @return Product
+     */
+    public function setUser(\AppBundle\Entity\Security $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\Security 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -12,4 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function findProductsByUser($user_id, $product_id = null)
+    {
+        $query = $qb = $this->createQueryBuilder('p')
+          ->join('p.user', 'u')
+          ->where('u.id = :user_id')
+          ->setParameter('user_id', $user_id)
+          ;
+
+        if ($product_id) {
+            $query
+              ->andWhere('p.id = :product_id')
+              ->setParameter('product_id', $product_id);
+
+            try {
+                return $query->getQuery()->getSingleResult();
+            } catch (\Doctrine\ORM\NoResultException $e) {
+                return null;
+            }
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }
